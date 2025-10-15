@@ -11,4 +11,6 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('tickets', [AdminTicketController::class, 'index'])
             ->name('admin.tickets.index');
+        Route::get('tickets/{id}', [AdminTicketController::class, 'show'])
+            ->name('admin.tickets.show');
     });

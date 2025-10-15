@@ -31,10 +31,18 @@
         <tbody>
         @foreach($tickets as $ticket)
             <tr>
-                <td>{{ $ticket->id }}</td>
+                <td>
+                    <a href="{{ route('admin.tickets.show', $ticket->id) }}">
+                        #{{ $ticket->id }}
+                    </a>
+                </td>
                 <td>{{ $ticket->customer->name }}</td>
                 <td>{{ $ticket->customer->email }}</td>
-                <td>{{ $ticket->subject }}</td>
+                <td>
+                    <a href="{{ route('admin.tickets.show', $ticket->id) }}">
+                        {{ $ticket->subject }}
+                    </a>
+                </td>
                 <td>{{ $ticket->status }}</td>
                 <td>{{ $ticket->created_at->format('d.m.Y H:i') }}</td>
             </tr>

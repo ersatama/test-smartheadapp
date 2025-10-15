@@ -6,6 +6,9 @@ namespace App\Services\Ticket;
 
 use App\Models\Ticket;
 use App\Services\QueryService;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TicketQueryService extends QueryService
 {
@@ -18,12 +21,17 @@ class TicketQueryService extends QueryService
         ];
     }
 
-    public function get(array $data = [], array $with = [])
+    public function get(array $data = [], array $with = []): LengthAwarePaginator
     {
         $query = $this->ticketRepository->getQuery($data);
         if (count($with) > 0) {
             $query->with(...$with);
         }
         return $query->latest()->paginate(15);
+    }
+
+    public function first(int $id): Model|Collection|Ticket|null
+    {
+        return Ticket::with(['customer', 'media'])->findOrFail($id);
     }
 }

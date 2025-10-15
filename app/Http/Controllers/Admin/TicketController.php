@@ -29,4 +29,10 @@ class TicketController extends Controller
         $tickets = $this->ticketQueryService->get($data);
         return view('admin.tickets.index', compact('tickets'));
     }
+
+    public function show(int $id): Factory|View
+    {
+        $ticket = $this->ticketQueryService->first($id);
+        return view('admin.tickets.show', compact('ticket'));
+    }
 }
