@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
         Customer::factory(5)
             ->has(Ticket::factory(3))
             ->create();
+
+        $this->call(AdminSeeder::class);
     }
 }
