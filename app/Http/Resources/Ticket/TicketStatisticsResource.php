@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources\Ticket;
 
 use Illuminate\Http\Request;
@@ -16,7 +18,7 @@ class TicketStatisticsResource extends JsonResource
     {
         return [
             'today' => $this['today'] ?? 0,
-            'week'  => $this['week'] ?? 0,
+            'week' => $this['week'] ?? 0,
             'month' => $this['month'] ?? 0,
         ];
     }

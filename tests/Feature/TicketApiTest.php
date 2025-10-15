@@ -16,11 +16,11 @@ class TicketApiTest extends TestCase
     public function it_creates_ticket_successfully()
     {
         $data = [
-            'name'    => 'Иван Иванов',
-            'email'   => 'ivan@example.com',
-            'phone'   => '+77001234567',
+            'name' => 'Иван Иванов',
+            'email' => 'ivan@example.com',
+            'phone' => '+77001234567',
             'subject' => 'Ошибка оплаты',
-            'text'    => 'Не проходит оплата на сайте.',
+            'text' => 'Не проходит оплата на сайте.',
         ];
 
         $response = $this->postJson('/api/tickets', $data);

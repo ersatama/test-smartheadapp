@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\WidgetController;
+declare(strict_types=1);
+
 use App\Http\Controllers\Admin\TicketController as AdminTicketController;
+use App\Http\Controllers\WidgetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,7 @@ Route::prefix('admin')
             ->name('admin.tickets.updateStatus');
     });
 
-Route::get('/', fn() => response('OK', 200));
+Route::get('/', fn () => response('OK', 200));
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
@@ -28,11 +30,13 @@ Route::post('/login', function (Request $request) {
     if (Auth::attempt($credentials)) {
         return redirect()->intended('/admin/tickets');
     }
+
     return back()->withErrors(['email' => 'Неверный логин или пароль']);
 });
 Route::get('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
+
     return redirect('/login');
 })->name('logout');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Ticket;
 
 use App\Http\Requests\Request;
@@ -13,10 +15,10 @@ class IndexRequest extends FormRequest
     {
         return [
             'status' => 'nullable|in:new,in_progress,done',
-            'email'  => 'nullable|email|max:255',
-            'phone'  => ['nullable', 'regex:/^\+[1-9]\d{1,14}$/'],
-            'from'   => 'nullable|date',
-            'to'     => 'nullable|date|after_or_equal:from',
+            'email' => 'nullable|email|max:255',
+            'phone' => ['nullable', 'regex:/^\+[1-9]\d{1,14}$/'],
+            'from' => 'nullable|date',
+            'to' => 'nullable|date|after_or_equal:from',
         ];
     }
 

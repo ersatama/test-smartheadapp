@@ -19,14 +19,15 @@ class TicketCommandService extends CommandService
             );
             $ticket = $customer->tickets()->create([
                 'subject' => $data['subject'],
-                'text'    => $data['text'],
-                'status'  => 'new',
+                'text' => $data['text'],
+                'status' => 'new',
             ]);
             if ($files) {
                 foreach ($files as $file) {
                     $ticket->addMedia($file)->toMediaCollection('attachments');
                 }
             }
+
             return $ticket;
         });
     }

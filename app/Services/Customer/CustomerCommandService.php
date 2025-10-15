@@ -8,5 +8,4 @@ use App\Services\CommandService;
 
 class CustomerCommandService extends CommandService
 {
-
 }

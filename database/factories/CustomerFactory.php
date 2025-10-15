@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Customer;
@@ -20,9 +22,9 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'  => fake()->name(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone' => '+7' . fake()->numerify('##########'),
+            'phone' => '+7'.fake()->numerify('##########'),
         ];
     }
 }

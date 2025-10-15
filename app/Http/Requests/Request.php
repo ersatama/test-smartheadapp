@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
@@ -27,8 +29,8 @@ trait Request
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'status'        =>  'failure',
-            'errors'        =>  $validator->errors(),
+            'status' => 'failure',
+            'errors' => $validator->errors(),
         ], 400));
     }
 }

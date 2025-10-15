@@ -8,5 +8,4 @@ use App\Services\QueryService;
 
 class CustomerQueryService extends QueryService
 {
-
 }

@@ -16,14 +16,16 @@ class TicketRepository implements TicketRepositoryInterface
         }
 
         if (isset($data['email'])) {
-            $query->whereHas('customer', fn($q) =>
-                $q->where('email', 'ILIKE', "%{$data['email']}%")
+            $query->whereHas(
+                'customer',
+                fn ($q) => $q->where('email', 'ILIKE', "%{$data['email']}%")
             );
         }
 
         if (isset($data['phone'])) {
-            $query->whereHas('customer', fn($q) =>
-                $q->where('phone', 'ILIKE', "%{$data['phone']}%")
+            $query->whereHas(
+                'customer',
+                fn ($q) => $q->where('phone', 'ILIKE', "%{$data['phone']}%")
             );
         }
 

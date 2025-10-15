@@ -16,7 +16,7 @@ class TicketQueryService extends QueryService
     {
         return [
             'today' => Ticket::createdToday()->count(),
-            'week'  => Ticket::createdThisWeek()->count(),
+            'week' => Ticket::createdThisWeek()->count(),
             'month' => Ticket::createdThisMonth()->count(),
         ];
     }
@@ -27,6 +27,7 @@ class TicketQueryService extends QueryService
         if (count($with) > 0) {
             $query->with(...$with);
         }
+
         return $query->orderBy('id', 'desc')->paginate(15);
     }
 

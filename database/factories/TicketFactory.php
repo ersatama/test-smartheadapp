@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Customer;
@@ -21,10 +23,10 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id'      => Customer::factory(),
-            'subject'          => fake()->sentence(3),
-            'text'             => fake()->paragraph(3),
-            'status'           => fake()->randomElement(['new', 'in_progress', 'done']),
+            'customer_id' => Customer::factory(),
+            'subject' => fake()->sentence(3),
+            'text' => fake()->paragraph(3),
+            'status' => fake()->randomElement(['new', 'in_progress', 'done']),
             'manager_reply_at' => fake()->optional()->dateTimeBetween('-2 days', 'now'),
         ];
     }

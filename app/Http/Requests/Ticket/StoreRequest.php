@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Ticket;
 
 use App\Http\Requests\Request;
@@ -12,12 +14,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'phone'   => ['required', 'regex:/^\+[1-9]\d{1,14}$/'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => ['required', 'regex:/^\+[1-9]\d{1,14}$/'],
             'subject' => 'required|string|max:255',
-            'text'    => 'required|string',
-            'files.*' => 'nullable|file|max:2048'
+            'text' => 'required|string',
+            'files.*' => 'nullable|file|max:2048',
         ];
     }
 }
