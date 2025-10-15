@@ -31,6 +31,16 @@ class TicketController extends Controller
     public function store(StoreRequest $request): JsonResponse
     {
         $data = $request->checked();
+
+        $ticketExists = $this->ticketQueryService->exists($data);
+
+        if ($ticketExists) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Вы уже отправляли заявку сегодня. Повторная отправка возможна завтра.'
+            ], 429);
+        }
+
         $ticket = $this->ticketCommandService->create($data, $request->file('files'));
 
         return response()->json([

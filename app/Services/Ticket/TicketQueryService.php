@@ -6,6 +6,7 @@ namespace App\Services\Ticket;
 
 use App\Models\Ticket;
 use App\Services\QueryService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -16,7 +17,7 @@ class TicketQueryService extends QueryService
     {
         return [
             'today' => Ticket::createdToday()->count(),
-            'week' => Ticket::createdThisWeek()->count(),
+            'week'  => Ticket::createdThisWeek()->count(),
             'month' => Ticket::createdThisMonth()->count(),
         ];
     }
@@ -34,5 +35,18 @@ class TicketQueryService extends QueryService
     public function first(int $id): Model|Collection|Ticket|null
     {
         return Ticket::with(['customer', 'media'])->findOrFail($id);
+    }
+
+    public function exists(array $data): bool
+    {
+        $today = Carbon::today();
+
+        return Ticket::query()
+            ->where(function ($q) use ($data) {
+                $q->where('email', $data['email'])
+                    ->orWhere('phone', $data['phone']);
+            })
+            ->whereDate('created_at', $today)
+            ->exists();
     }
 }
