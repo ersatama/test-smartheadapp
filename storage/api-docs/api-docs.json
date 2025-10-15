@@ -1,0 +1,106 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Smarthead API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tickets": {
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Создать заявку",
+                "operationId": "a1c61aa9ad2af5352d6799fff6e32487",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "subject",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Иван Иванов"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "ivan@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+77001234567"
+                                    },
+                                    "subject": {
+                                        "type": "string",
+                                        "example": "Проблема с оплатой"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "У меня не прошла транзакция."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Успешно создано"
+                    },
+                    "422": {
+                        "description": "Ошибка валидации"
+                    }
+                }
+            }
+        },
+        "/api/tickets/statistics": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Получить статистику заявок",
+                "operationId": "49153d75474e76ab72fbf6ed474a2b5f",
+                "responses": {
+                    "200": {
+                        "description": "Статистика по заявкам",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "today": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "week": {
+                                            "type": "integer",
+                                            "example": 30
+                                        },
+                                        "month": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        }
+    ]
+}
