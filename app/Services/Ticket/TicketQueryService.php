@@ -17,4 +17,13 @@ class TicketQueryService extends QueryService
             'month' => Ticket::createdThisMonth()->count(),
         ];
     }
+
+    public function get(array $data = [], array $with = [])
+    {
+        $query = $this->ticketRepository->getQuery($data);
+        if (count($with) > 0) {
+            $query->with(...$with);
+        }
+        return $query->latest()->paginate(15);
+    }
 }
