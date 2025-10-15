@@ -27,7 +27,7 @@ class TicketQueryService extends QueryService
         if (count($with) > 0) {
             $query->with(...$with);
         }
-        return $query->latest()->paginate(15);
+        return $query->orderBy('id', 'desc')->paginate(15);
     }
 
     public function first(int $id): Model|Collection|Ticket|null
