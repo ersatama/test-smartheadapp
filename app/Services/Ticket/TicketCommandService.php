@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ticket;
 
+use App\Models\Ticket;
 use App\Services\CommandService;
 use Illuminate\Support\Facades\DB;
 
@@ -28,5 +29,10 @@ class TicketCommandService extends CommandService
             }
             return $ticket;
         });
+    }
+
+    public function update(Ticket $ticket, array $data): void
+    {
+        $ticket->update($data);
     }
 }

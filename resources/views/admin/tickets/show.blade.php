@@ -34,5 +34,28 @@
         </div>
     @endif
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <h4>Изменить статус</h4>
+
+    <form method="POST" action="{{ route('admin.tickets.updateStatus', $ticket->id) }}">
+        @csrf
+        @method('PATCH')
+
+        <select name="status" class="form-select mb-2">
+            <option value="new" @selected($ticket->status === 'new')>Новый</option>
+            <option value="in_progress" @selected($ticket->status === 'in_progress')>В работе</option>
+            <option value="done" @selected($ticket->status === 'done')>Обработан</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+
+    <br>
+
     <a href="{{ route('admin.tickets.index') }}" class="btn btn-outline-secondary">← Назад к списку</a>
+
+
 @endsection

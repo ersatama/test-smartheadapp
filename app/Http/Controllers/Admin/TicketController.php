@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ticket\IndexRequest;
+use App\Http\Requests\Ticket\StatusRequest;
 use App\Services\Customer\{CustomerCommandService, CustomerQueryService};
+use Illuminate\Http\RedirectResponse;
+use App\Services\Ticket\{TicketCommandService, TicketQueryService};
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
-use App\Services\Ticket\{TicketCommandService, TicketQueryService};
 
 class TicketController extends Controller
 {
@@ -34,5 +36,21 @@ class TicketController extends Controller
     {
         $ticket = $this->ticketQueryService->first($id);
         return view('admin.tickets.show', compact('ticket'));
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function updateStatus(StatusRequest $request, int $id): RedirectResponse
+    {
+        $data = $request->checked();
+        $ticket = $this->ticketQueryService->first($id);
+        $this->ticketCommandService->update($ticket, [
+            'status'           => $data['status'],
+            'manager_reply_at' => now(),
+        ]);
+        return redirect()
+            ->route('admin.tickets.show', $ticket->id)
+            ->with('success', 'Статус успешно обновлён');
     }
 }

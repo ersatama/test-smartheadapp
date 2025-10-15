@@ -13,4 +13,6 @@ Route::prefix('admin')
             ->name('admin.tickets.index');
         Route::get('tickets/{id}', [AdminTicketController::class, 'show'])
             ->name('admin.tickets.show');
+        Route::patch('tickets/{id}/status', [AdminTicketController::class, 'updateStatus'])
+            ->name('admin.tickets.updateStatus');
     });
